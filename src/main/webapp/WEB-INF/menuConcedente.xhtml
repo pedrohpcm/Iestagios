@@ -1,0 +1,32 @@
+<ui:composition 
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:pu="http://primefaces.org/ultima">
+
+    <h:form id="menuform"> 
+        <div class="layout-menu #{guestPreferences.menuClass}">
+            <div class="nano">
+                <div class="nano-content menu-scroll-content">
+                    <ui:fragment rendered="#{guestPreferences.profileMode == 'inline' and guestPreferences.menuLayout != 'menu-layout-static menu-layout-horizontal'}">
+                        <div class="profile">   
+                            <i style="font-size:48px;color:#757575;padding-top:24px;"><p:outputLabel rendered="#{mBeanConcedente.conta.estaCompleto ne 'N'}" value="#{mBeanConcedente.concedente.nome}"/></i>
+                        </div>
+
+                    </ui:fragment>
+
+                    <pu:menu widgetVar="me">
+                        <p:menuitem id="index" value="Página inicial" icon="&#xE8D2;" url="/iEstagios/Concedente/indexConcedente.xhtml" />
+                        <p:menuitem id="completarCadastro" rendered="#{mBeanConcedente.conta.estaCompleto ne 'S'}" value="Completar cadastro" icon="&#xE8D2;" url="/iEstagios/cadastrarConcedente.xhtml" />
+                        <p:menuitem id="cadastrarVagas" rendered="#{mBeanConcedente.conta.estaCompleto ne 'N'}" value="Cadastrar Vaga" icon="&#xE8D2;" url="/iEstagios/Concedente/_cadastrarVaga.xhtml" />
+                        <p:menuitem id="contratarEstagiario" rendered="#{mBeanConcedente.conta.estaCompleto ne 'N'}" value="Contratar Estagiário" icon="&#xE8D2;" url="/iEstagios/Concedente/contratarEstagiario.xhtml" />
+                        <p:menuitem id="gerenciarEstagio" rendered="#{mBeanConcedente.conta.estaCompleto ne 'N'}"  value="Gerenciar Estágios" icon="&#xE8D2;" url="/iEstagios/Concedente/gerenciarEstagios.xhtml" />
+                        <p:menuitem id="sair" value="Sair" icon="&#xE8D2;" actionListener="#{mBeanLogin.sair}"/>
+                    </pu:menu>
+                </div>
+            </div>
+        </div>
+    </h:form>
+</ui:composition>

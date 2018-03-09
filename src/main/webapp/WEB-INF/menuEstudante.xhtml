@@ -1,0 +1,38 @@
+<ui:composition 
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:pu="http://primefaces.org/ultima">
+
+    <h:form id="menuform"> 
+        <div class="layout-menu #{guestPreferences.menuClass}">
+            <div class="nano">
+                <div class="nano-content menu-scroll-content">
+                    <ui:fragment rendered="#{guestPreferences.profileMode == 'inline' and guestPreferences.menuLayout != 'menu-layout-static menu-layout-horizontal'}">
+                        <div class="profile">
+                            <div >ESTUDANTE</div>
+                            <a id="profile-options" href="#">
+                                <span class="profile-name" ><h3 style="text-transform: uppercase;">#{mBeanLogin.usuario.login}</h3></span>
+
+                            </a>
+                        </div>
+
+                    </ui:fragment>
+
+                    <pu:menu widgetVar="me">
+
+                        <p:menuitem id="inicio" value="Início" icon="&#xE8D2;" url="/iEstagios/Estudante/indexEstudante.xhtml" />
+                        <p:menuitem rendered="#{mBeanAluno.conta.estaCompleto ne 'S'}" id="um_lnk111" value="Completar cadastro" icon="&#xE8D2;" url="/iEstagios/Estudante/completarCadastro.xhtml" />
+                        <p:menuitem rendered="#{mBeanAluno.conta.estaCompleto ne 'N'}" id="um_lnk112" value="Atualizar cadastro" icon="&#xE8D2;" url="/iEstagios/Estudante/cadastrarEstudante.xhtml" />
+                        <p:menuitem rendered="#{mBeanAluno.conta.estaCompleto ne 'N'}" id="um_lnk113" value="Gerenciar Estagios" icon="&#xE8D2;" url="/iEstagios/Estudante/gerenciarEstagios.xhtml" />
+                        <p:menuitem rendered="#{mBeanAluno.conta.estaCompleto ne 'N'}" id="um_teste"  value="Atualizar currículo" icon="&#xE30B;" url="/iEstagios/Estudante/atualizarCurriculo.xhtml" />              
+                        <p:menuitem rendered="#{mBeanAluno.conta.estaCompleto ne 'N' and mBeanLogin.curriculo != null}" id="um_relatorioEstagiario" value="Relatório Estagiário" icon="&#xE30B;" url="/iEstagios/Estudante/relatorioEstagiario.xhtml" />
+                        <p:menuitem id="sair" value="Sair" icon="&#xE8D2;" actionListener="#{mBeanLogin.sair}"/>
+                    </pu:menu>
+                </div>
+            </div>
+        </div>
+    </h:form>
+</ui:composition>

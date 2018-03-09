@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="/WEB-INF/templateConcedente.xhtml">
+
+    <ui:define name="head">
+        <script type="text/javascript">
+            //<![CDATA[
+            function skinChart() {
+                this.cfg.shadow = false;
+                this.cfg.title = '';
+                this.cfg.seriesColors = ['#FFC107', '#03A9F4'];
+                this.cfg.grid = {
+                    background: '#ffffff',
+                    borderColor: '#ffffff',
+                    gridLineColor: '#EEEEEE',
+                    shadow: false
+                };
+                this.cfg.axesDefaults = {
+                    rendererOptions: {
+                        textColor: '#212121'
+                    }
+                };
+                this.cfg.seriesDefaults = {
+                    shadow: false,
+                    lineWidth: 1,
+                    markerOptions: {
+                        shadow: false,
+                        size: 7,
+                        style: 'circle'
+                    }
+                }
+            }
+            //]]>  
+        </script>
+        <style type="text/css">
+            .main-content {
+                padding: 0;
+            }
+        </style>
+    </ui:define>
+
+    <ui:define name="title">iEstagios</ui:define>
+    <ui:define name="content">
+
+        <div class="ui-g ui-fluid" align="center">
+            <div class="ui-g-12 ui-lg-12"></div>
+            <div class="ui-g-12 ui-lg-12">
+                <div class="card">
+
+                    <p:panel id="basic" header="Estágios">
+                        <h:form>
+                            <div class="ui-g-12 ui-md-12" style="text-align:left">
+                                <p:outputLabel value="Nome da vaga:" for="nome" />
+                                <p:inputText id="nome" value="#{mBeanConcedente.vaga.nomeDaVaga}" required="true"/>
+                            </div>
+                            <div class="ui-g-12 ui-md-12" style="text-align:left">
+                                <p:outputLabel value="Valor da bolsa:" for="valorBolsa" />
+                                <p:inputText id="valorBolsa" value="#{mBeanConcedente.vaga.valorDaBolsa}" required="true"/>
+                            </div>
+                            <div class="ui-g-12 ui-md-12" style="text-align:left">
+                                <p:outputLabel value="Benefícios:" for="beneficios" />
+                                <p:inputText id="beneficios" value="#{mBeanConcedente.vaga.beneficios}" required="true"/>
+                            </div>
+                            <div class="ui-g-12 ui-md-12" style="text-align:left">
+                                <p:outputLabel value="Auxílio transporte:" for="auxilioTransporte" />
+                                <p:inputText id="auxilioTransporte" value="#{mBeanConcedente.vaga.auxilioTransporte}" required="true"/>
+                            </div>                    
+                            <div class="ui-g-12 ui-md-12" style="text-align:left">
+                                <p:outputLabel value="Plano de atividades:" for="planoDeAtividades" />
+                                <p:inputTextarea id="planoDeAtividades" value="#{mBeanConcedente.vaga.planoDeAtividades}" rows="3"/>
+                            </div>
+                            <div class="ui-g-12 ui-md-12" style="text-align:left">
+                                <p:outputLabel value="Jornada diária:" for="jornadaDiaria" />
+                                <p:inputText id="jornadaDiaria" value="#{mBeanConcedente.vaga.jornadaDiaria}" required="true"/>
+                            </div>
+                            <div class="ui-g-12 ui-md-12" style="text-align:left">
+                                <p:outputLabel value="Total de horas semanais:" for="horasSemanais" />
+                                <p:inputText id="horasSemanais" value="#{mBeanConcedente.vaga.totalHorasSemanais}" required="true"/>
+                            </div>
+                            <p:commandButton value="Cadastrar" styleClass="green-btn" actionListener="#{mBeanConcedente.cadastrarVaga}"/>
+                        </h:form>
+                    </p:panel>
+                </div>
+            </div>
+        </div>
+    </ui:define>
+</ui:composition>

@@ -1,0 +1,121 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/templateEstudante.xhtml">
+    <ui:define name="head">
+        <style type="text/css">
+            .cars-datalist .text-column p:last-child{
+                color:#757575;
+            }
+
+            .cars-datalist .car-item i, .cars-datalist .car-item .car-details {
+                display: inline-block;
+                vertical-align: middle;
+            }
+
+            .cars-datalist .car-item button {
+                float: right;
+            }
+
+            .cars-datalist ul {
+                margin: 0;
+                padding: 0;
+            }
+
+            .ui-car-display td:last-child {
+                font-weight: 700;
+            }
+
+            @media (max-width:640px) {
+                .cars-datalist .text-column {
+                    text-align: center;
+                }
+            }
+        </style>        
+    </ui:define>
+    <ui:define name="content">
+        <div class="ui-g ui-fluid" align="center">
+            <div class="ui-g-12 ui-lg-12"></div>
+            <div class="card">
+
+                <p:panel id="basic" header="Complete seu cadastro">
+                    <h:form>
+                        <h2>Dados pessoais</h2>
+                        <div class="ui-g-12 ui-md-12" style="text-align:left">
+                            <p:outputLabel value="Nome completo:" for="nomeEstudante" />
+                            <p:inputText id="nomeEstudante" value="#{mBeanAluno.aluno.nome}" required="true"/>
+                        </div>
+                        <div class="ui-g-12 ui-md-12" style="text-align:left">
+                            <p:outputLabel value="CPF:" for="cpfAluno" />
+                            <p:inputText id="cpfAluno" value="#{mBeanAluno.aluno.nome}" required="true"/>
+                        </div>
+
+                        <div class="ui-g-12 ui-md-12" style="text-align:left">
+                            <p:outputLabel value="Rg:" for="rg" />
+                            <p:inputText id="rg" value="#{mBeanAluno.aluno.rg}" required="true"/>
+                        </div>
+
+                        <div class="ui-g-12 ui-md-12" style="text-align:left">
+                            <p:outputLabel value="Órgão expeditor:" for="orgaoExpeditor" />
+                            <p:inputText id="orgaoExpeditor" value="#{mBeanAluno.aluno.orgaoExpeditor}" required="true"/>
+                        </div>
+                        <h2>Endereço</h2>
+                        <div class="ui-g-12 ui-md-12" style="text-align:left">
+                            <p:outputLabel value="Rua:" for="rua" />
+                            <p:inputText id="rua" value="#{mBeanAluno.aluno.endereco.rua}" required="true"/>
+                        </div>
+
+                        <div class="ui-g-12 ui-md-12" style="text-align:left">
+                            <p:outputLabel value="Bairro:" for="bairro" />
+                            <p:inputText id="bairro" value="#{mBeanAluno.aluno.endereco.bairro}" required="true"/>
+                        </div>
+
+                        <div class="ui-g-12 ui-md-12" style="text-align:left">
+                            <p:outputLabel value="Número da casa:" for="numero" />
+                            <p:inputText id="numero" value="#{mBeanAluno.aluno.endereco.numero}" required="true"/>
+                        </div>
+
+                        <div class="ui-g-12 ui-md-12" style="text-align:left">
+                            <p:outputLabel value="Cidade:" for="cidade" />
+                            <p:inputText id="cidade" value="#{mBeanAluno.aluno.endereco.cidade}" required="true"/>
+                        </div>
+
+                        <div class="ui-g-12 ui-md-12" style="text-align:left">
+                            <p:outputLabel value="Estado:" for="estado" />
+                            <p:inputText id="estado" value="#{mBeanAluno.aluno.endereco.estado}" required="true"/>
+                        </div>
+
+                        <div class="ui-g-12 ui-md-12" style="text-align:left">
+                            <p:outputLabel value="Cep:" for="cep" />
+                            <p:inputText id="cep" value="#{mBeanAluno.aluno.endereco.cep}" required="true"/>
+                        </div>
+
+                        <div class="ui-g-12 ui-md-12" style="text-align:left">
+                            <p:outputLabel value="Data de nascimento:" for="dataDeNascimento" />
+                            <p:inputMask id="dataDeNascimento" value="#{mBeanAluno.aluno.dataDeNascimento}" mask="99/99/9999"  required="true"/>
+                        </div>
+
+                        <div class="ui-g-12 ui-md-12" style="text-align:left">
+                            <p:outputLabel value="Curso:" for="curso" />
+                            <p:inputText id="curso" value="#{mBeanAluno.aluno.curso}" required="true"/>
+                        </div>
+
+                        <div class="ui-g-12 ui-md-12" style="text-align:left">
+                            <p:outputLabel value="Periodo/Ano:" for="ano" />
+                            <p:inputText id="ano" value="#{mBeanAluno.aluno.ano}" required="true"/>
+                        </div>
+
+                        <h2>Contato</h2>
+                        <div class="ui-g-12 ui-md-12" style="text-align:left">
+                            <p:outputLabel value="Telefone para contato:" for="telefone" />
+                            <p:inputText id="telefone" value="#{mBeanAluno.aluno.telefone.numero}" required="true"/>
+                        </div>
+                        <p:commandButton value="Cadastrar" styleClass="green-btn" actionListener="#{mBeanAluno.completarCadastro()}"/>
+                    </h:form>
+                </p:panel>
+            </div>
+        </div>
+    </ui:define>
+</ui:composition>

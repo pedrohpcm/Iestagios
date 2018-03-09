@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+
+    <h:head>
+        <title>Cadastro concedente</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </h:head>
+
+    <h:body>
+
+        <h:form>
+            <div class="ui-g ui-fluid" align="center">
+                <div class="ui-g-12 ui-lg-3"></div>
+                <div class="ui-g-12 ui-lg-6">
+                    <div class="card">
+                        <p:panel id="basic" header="Cadastrar concedente">
+                            <p:wizard flowListener="#{mBeanAluno.onFlowProcess}">     
+                                <p:tab id="Dados_pessoais" title="Dados principais">
+                                    <div class="ui-g-12 ui-md-12" style="text-align:left">
+                                        <p:outputLabel value="CNPJ:" for="cnpj" />
+                                        <p:inputText id="cnpj" value="#{mBeanConcedente.concedente.cnpj}" required="true"/>
+                                    </div>  
+
+                                    <div class="ui-g-12 ui-md-12" style="text-align:left">
+                                        <p:outputLabel value="Ramo de atividade:" for="ramo" />
+                                        <p:inputText id="ramo" value="#{mBeanConcedente.concedente.ramoDeAtividade}" required="true"/>
+                                    </div>           
+
+                                    <div class="ui-g-12 ui-md-12" style="text-align:left">
+                                        <p:outputLabel value="Razão social:" for="razaoSocial" />
+                                        <p:inputText id="razaoSocial" value="#{mBeanConcedente.concedente.razaoSocial}" required="true"/>
+                                    </div>
+
+                                    <div class="ui-g-12 ui-md-12" style="text-align:left">
+                                        <p:outputLabel value="Nome fantasia:" for="nomeFantasia" />
+                                        <p:inputText id="nomeFantasia" value="#{mBeanConcedente.concedente.nome}" required="true"/>
+                                    </div>
+
+                                    <div class="ui-g-12 ui-md-12" style="text-align:left">
+                                        <p:outputLabel value="Telefone:" for="telefone" />
+                                        <p:inputText id="telefone" value="#{mBeanConcedente.concedente.telefone.numero}" required="true"/>
+                                    </div>
+
+                                    <div class="ui-g-12 ui-md-12" style="text-align:left">
+                                        <p:outputLabel value="Representante:" for="representante" />
+                                        <p:inputText id="representante" value="#{mBeanConcedente.concedente.representante}" required="true"/>
+                                    </div> 
+                                    <div class="ui-g-12 ui-md-12" style="text-align:left">
+                                        <p:outputLabel value="Cargo:" for="cargo" />
+                                        <p:inputText id="cargo" value="#{mBeanConcedente.concedente.cargo}" required="true"/>
+                                    </div>
+
+                                    <p:panelGrid columns="1" layout="grid" styleClass="ui-panelgrid-blank lesspad" >
+                                        <p:selectOneButton value="#{mBeanConcedente.concedente.tipoConcedente}">
+                                            <f:selectItem itemLabel="Empresa" itemValue="Empresa" />
+                                            <f:selectItem itemLabel="Profissional Liberal" itemValue="ProfLiberal" />
+                                            <f:selectItem itemLabel="Instituição de ensino" itemValue="ProfLiberal" />
+                                        </p:selectOneButton>
+                                    </p:panelGrid>
+
+                                </p:tab >
+                                <p:tab  id="Endereco" title="Endereço">
+                                    <div class="ui-g-12 ui-md-12" style="text-align:left">
+                                        <p:outputLabel value="Rua:" for="rua" />
+                                        <p:inputText id="rua" value="#{mBeanConcedente.concedente.endereco.rua}" required="true"/>
+
+                                        <p:outputLabel value="Numero:" for="numero" />
+                                        <p:inputText id="numero" value="#{mBeanConcedente.concedente.endereco.numero}" required="true"/>
+                                    </div>
+
+                                    <div class="ui-g-12 ui-md-12" style="text-align:left">
+                                        <p:outputLabel value="Bairro:" for="bairro" />
+                                        <p:inputText id="bairro" value="#{mBeanConcedente.concedente.endereco.bairro}" required="true"/>
+                                    </div>
+
+                                    <div class="ui-g-12 ui-md-12" style="text-align:left">
+                                        <p:outputLabel value="Cidade:" for="cidade" />
+                                        <p:inputText id="cidade" value="#{mBeanConcedente.concedente.endereco.cidade}" required="true"/>
+                                    </div>
+
+                                    <div class="ui-g-12 ui-md-12" style="text-align:left">
+                                        <p:outputLabel value="Estado:" for="estadoCon" />
+                                        <p:inputText id="estadoCon" value="#{mBeanConcedente.concedente.endereco.estado}" required="true"/>
+                                    </div>
+
+                                    <div class="ui-g-12 ui-md-12" style="text-align:left">
+                                        <p:outputLabel value="Cep:" for="cep" />
+                                        <p:inputText id="cep" value="#{mBeanConcedente.concedente.endereco.cep}" required="true"/>
+                                    </div>
+
+                                    <div class="ui-g-12 ui-md-12" style="text-align:left">
+                                        <h:outputLabel for="senha" value="Senha:" />
+                                        <p:password id="senha" value="#{mBeanConcedente.concedente.senha}" match="confirmacao" label="senha" required="true" />
+
+                                        <h:outputLabel for="confirmacao" value="Confirmação:" />
+                                        <p:password id="confirmacao" value="#{mBeanConcedente.concedente.senha}" label="confirmacao:" required="true" />
+                                    </div>
+
+                                    <p:commandButton value="Cadastrar" styleClass="green-btn" actionListener="#{mBeanConcedente.cadastrarConcedente()}"/>
+                                </p:tab>
+                            </p:wizard>
+                        </p:panel>
+                    </div>
+                </div>
+            </div>
+        </h:form>
+    </h:body>
+</html>

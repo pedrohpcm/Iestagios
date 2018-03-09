@@ -1,0 +1,35 @@
+<ui:composition 
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:pu="http://primefaces.org/ultima">
+
+    <h:form id="menuform"> 
+        <div class="layout-menu #{guestPreferences.menuClass}">
+            <div class="nano">
+                <div class="nano-content menu-scroll-content">
+
+
+                    <pu:menu widgetVar="me">
+                        <p:menuitem id="um_dashboard" value="Dashboard" icon="&#xE871;" outcome="/dashboard"/>
+
+                        <p:menuitem id="um_utils" value="Utils" icon="&#xE869;" outcome="/utils"/>
+                        <p:menuitem id="um_doc" value="Documentation" icon="&#xE880;" outcome="/docs"/>
+                        <p:menuitem id="um_sample7" value="Estágios" icon="&#xE30B;" outcome="/iEstagios/estagiosListar" />
+                        <p:menuitem id="um_sample2" value="Documentos" icon="&#xE30B;" outcome="/iEstagios/estagiosDocumentos" />
+                        <p:menuitem id="um_sample3" value="Visitas Orientador" icon="&#xE30B;" outcome="/iEstagios/visitasOrientador" />
+                        <p:menuitem id="um_sample4" value="Relatório Estagiário" icon="&#xE30B;" outcome="/iEstagios/relatorioEstagiario" />
+                        <p:menuitem id="um_sample5" value="Relatório Supervisor" icon="&#xE30B;" outcome="/iEstagios/relatorioSupervisor" />
+                        <p:menuitem id="um_sample5" value="Termo Encerramento" icon="&#xE30B;" outcome="/iEstagios/relatorioSupervisor" />
+                        <p:menuitem id="um_sample6" value="Sample Page" icon="&#xE30B;" outcome="/sample" />
+                        <p:menuitem id="um_file" value="File" icon="&#xE226;" outcome="/file" />
+
+
+                    </pu:menu>
+                </div>
+            </div>
+        </div>
+    </h:form>
+</ui:composition>

@@ -1,0 +1,90 @@
+<ui:composition 
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:pu="http://primefaces.org/ultima">
+
+    <h:form id="menuform"> 
+        <div class="layout-menu #{guestPreferences.menuClass}">
+            <div class="nano">
+                <div class="nano-content menu-scroll-content">
+                    <ui:fragment rendered="#{guestPreferences.profileMode == 'inline' and guestPreferences.menuLayout != 'menu-layout-static menu-layout-horizontal'}">
+                        <div class="profile">
+                            <div class="profile-image"></div>
+                            <a id="profile-options" href="#">
+                                <span class="profile-name">Jane Williams</span>
+                                <i class="material-icons">&#xE313;</i>
+                            </a>
+                        </div>
+
+                        <ul id="profile-menu" class="ultima-menu">
+                            <li role="menuitem">
+                                <a href="#" class="ripplelink">
+                                    <i class="material-icons">&#xE7FD;</i>
+                                    <span>Profile</span>
+                                </a>
+                            </li>
+                            <li role="menuitem">
+                                <a href="#" class="ripplelink">
+                                    <i class="material-icons">&#xE32A;</i>
+                                    <span>Privacy</span>
+                                </a>
+                            </li>
+                            <li role="menuitem">
+                                <a href="#" class="ripplelink">
+                                    <i class="material-icons">&#xE8B9;</i>
+                                    <span>Settings</span>
+                                </a>
+                            </li>
+                            <li role="menuitem">
+                                <a href="#" class="ripplelink">
+                                    <i class="material-icons">&#xE8AC;</i>
+                                    <span>Logout</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </ui:fragment>
+
+                    <pu:menu widgetVar="me">
+
+
+                        <p:submenu id="um_hierarchy4" label="Estudantes" icon="&#xE5D2;">
+                            <p:menuitem id="um_lnk111" value="Cadastro Estudante" icon="&#xE8D2;" url="/cadastrarEstudante.xhtml" />
+                            <p:menuitem id="um_lnk112" value="Vagas de Estágio" icon="&#xE8D2;" url="/ListarVagas.xhtml" />
+                            <p:menuitem id="um_cadastrarCurriculo" value="Cadastrar Curriculo" icon="&#xE8D2;" url="/cadastrarCurriculo.xhtml" />
+                            <p:menuitem id="um_lnk113" value="Gerenciar Estagios" icon="&#xE8D2;" url="/iEstagios/estagiosListar.xhtml" />
+                            <p:menuitem id="um_relatorioEstagiario" value="Relatório Estagiário" icon="&#xE30B;" url="/iEstagios/relatorioEstagiario.xhtml" />
+                                                    <p:menuitem id="um_docsEstudante" value="Documentos" icon="&#xE30B;" outcome="/iEstagios/estagiosDocumentosEstudantes" />
+
+                        </p:submenu>
+                        <p:submenu id="um_hierarchy3" label="Empresas" icon="&#xE5D2;">
+                            <p:menuitem id="um_lnk114" value="Cadastro Empresa" icon="&#xE8D2;" url="/cadastrarConcedente.xhtml" />
+                            <p:menuitem id="um_lnk115" value="Cadastrar Vaga" icon="&#xE8D2;" url="/cadastrarVaga.xhtml" />
+                            <p:menuitem id="um_lnk116" value="Gerenciar Vagas" icon="&#xE8D2;" url="/gerenciarVagas.xhtml" />
+                            <p:menuitem id="um_lnk117" value="Contratar Estagiário" icon="&#xE8D2;" url="/contratarEstagiario.xhtml" />
+                            <p:menuitem id="um_lnk118" value="Gerenciar Estágios" icon="&#xE8D2;" url="/iEstagios/estagiosListar.xhtml" />
+                                                    <p:menuitem id="visitaOrientador" value="Visitas Orientador" icon="&#xE30B;" url="/iEstagios/visitasOrientador.xhtml" />
+                        <p:menuitem id="relatorioSupervisor" value="Relatório Supervisor" icon="&#xE30B;" url="/iEstagios/relatorioSupervisor.xhtml" />
+                                                <p:menuitem id="um_docsEmpresa" value="Documentos" icon="&#xE30B;" outcome="/iEstagios/estagiosDocumentos" />
+                        </p:submenu>
+                        <p:submenu id="um_hierarchy2" label="Instituições de Ensino" icon="&#xE5D2;">
+                            <p:menuitem id="um_lnk119" value="Cadastro Inst. Ensino" icon="&#xE8D2;" url="/cadastrarConcedente.xhtml" />
+                            <p:menuitem id="um_lnk120" value="Anunciar Vagas" icon="&#xE8D2;" url="/cadastrarVaga.xhtml" />
+                            <p:menuitem id="um_lnk121" value="Gerenciar Vagas" icon="&#xE8D2;" url="gerenciarVagas.xhtml" />
+                            <p:menuitem id="um_lnk122" value="Contratar Estagiário" icon="&#xE8D2;" url="/contratarEstagiario.xhtml" />
+                            <p:menuitem id="um_lnk123" value="Gerenciar Estágios" icon="&#xE8D2;" url="/iEstagios/estagiosListar.xhtml" />
+                                                    <p:menuitem id="um_sample3" value="Visitas Orientador" icon="&#xE30B;" url="/iEstagios/visitasOrientador.xhtml" />
+                        <p:menuitem id="um_sample5" value="Relatório Supervisor" icon="&#xE30B;" url="/iEstagios/relatorioSupervisor.xhtml" />
+                                                <p:menuitem id="um_docsiEnsino" value="Documentos" icon="&#xE30B;" outcome="/iEstagios/estagiosDocumentos" />
+                        </p:submenu>
+
+                       
+
+                    </pu:menu>
+                </div>
+            </div>
+        </div>
+    </h:form>
+</ui:composition>

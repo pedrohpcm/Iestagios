@@ -1,0 +1,111 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+
+    <ui:define name="title">Dashboard</ui:define>
+
+    <ui:define name="head">
+        
+        
+        <script type="text/javascript">
+            //<![CDATA[
+            function skinChart() {
+                this.cfg.shadow = false;
+                this.cfg.title = '';
+                this.cfg.seriesColors = ['#FFC107', '#03A9F4'];
+                this.cfg.grid = {
+                    background: '#ffffff',
+                    borderColor: '#ffffff',
+                    gridLineColor: '#EEEEEE',
+                    shadow: false
+                };
+                this.cfg.axesDefaults = {
+                    rendererOptions: {
+                        textColor: '#212121'
+                    }
+                };
+                this.cfg.seriesDefaults = {
+                    shadow: false,
+                    lineWidth: 1,
+                    markerOptions: {
+                        shadow: false,
+                        size: 7,
+                        style: 'circle'
+                    }
+                }
+            }
+            //]]>  
+        </script>
+        <style type="text/css">
+            .main-content {
+                padding: 0;
+            }
+        </style>
+    </ui:define>
+
+    <ui:define name="content">
+        <div class="ui-g dashboard">
+
+
+
+
+            <div class="ui-g-12 ui-md-12 ui-lg-12 task-list">
+                <div class="card">
+                    
+                       Preencher | Gerar | Baixar | Arquivar
+                   
+                </div>
+            </div>
+
+
+
+           
+
+
+
+
+
+            <div class="ui-g-12 ui-md-12">
+
+                <h:form>
+                    <div class="card">
+                        <h1>Relatorios de Avaliação do Supervisor</h1>
+                        <p:dataTable var="car" value="#{dtBasicView.cars}" selectionMode="single" rowKey="#{car.id}" reflow="true" style="margin-bottom:20px">
+                            <f:facet name="header">Relatórios</f:facet>
+
+                            <p:column headerText="Data Limite" sortBy="#{car.id}">
+                                <h:outputText value="#{car.id}" />
+                            </p:column>
+
+                            <p:column headerText="Data Relatório" sortBy="#{car.id}">
+                                
+                            </p:column>
+
+
+
+                            <p:column headerText="Arquivo" sortBy="#{car.id}">
+                                <h:outputText value="#{car.id}" />
+                            </p:column>
+
+                            <p:column headerText="Ações" sortBy="#{car.id}">
+                                <h:outputText value="Visualizar" />
+                            </p:column>
+
+
+
+
+                        </p:dataTable>   
+
+
+                    </div>
+                </h:form>
+            </div>
+
+
+        </div>
+    </ui:define>
+
+</ui:composition>

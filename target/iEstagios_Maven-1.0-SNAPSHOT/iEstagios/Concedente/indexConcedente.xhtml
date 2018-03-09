@@ -1,0 +1,134 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/templateConcedente.xhtml">
+
+
+    <ui:define name="head">
+       <style type="text/css">
+            .cars-datalist .text-column p:last-child{
+                color:#757575;
+            }
+
+            .cars-datalist .car-item i, .cars-datalist .car-item .car-details {
+                display: inline-block;
+                vertical-align: middle;
+            }
+
+            .cars-datalist .car-item button {
+                float: right;
+            }
+
+            .cars-datalist ul {
+                margin: 0;
+                padding: 0;
+            }
+
+            .ui-car-display td:last-child {
+                font-weight: 700;
+            }
+
+            @media (max-width:640px) {
+                .cars-datalist .text-column {
+                    text-align: center;
+                }
+            }
+        </style>        
+    </ui:define>
+    <ui:define name="title">File</ui:define>
+    <ui:define name="content">
+        <h:form id="form">
+            <div class="ui-g-12">
+                <div class="card card-w-title">
+
+                    <p:growl id="message" showDetail="true" />
+                    <p:dataList value="#{mBeanConcedente.vagas}" var="vaga" 
+                                type="unordered" itemType="none" paginator="true" rows="7" styleClass="cars-datalist">
+                        <f:facet name="header">
+                            Suas vagas:
+                        </f:facet>
+                        <div style="border-bottom: 1px solid #bdbdbd" class="clearfix car-item" >
+                            <i class="ui-icon ui-icon-account-circle" style="font-size:48px;color:#757575;margin:24px;"></i>
+                            <div class="car-details">
+                                <p >#{vaga.nomeDaVaga}</p>
+                                <p style="color:#757575">#{vaga.planoDeAtividades} -</p> 
+                                <p style="color:#23c436">R$#{vaga.valorDaBolsa}</p>   
+                            </div>
+                            <p:commandButton update=":form:carDetail" oncomplete="PF('carDialog2').show()" title="View Detail" icon="ui-icon-search" style="margin:35px 24px 0 0">
+                                <f:setPropertyActionListener value="#{vaga}" target="#{mBeanConcedente.vaga}" />
+                            </p:commandButton>
+                        </div>
+                    </p:dataList>
+
+                    <p:dialog header="Detalhes da vaga" widgetVar="carDialog2" responsive="true" modal="true" showEffect="blind" hideEffect="explode" resizable="false">
+                        <p:outputPanel id="carDetail" style="text-align:center;">
+                            <p:dataList value="#{mBeanConcedente.estudantes}" var="estudante" type="unordered" itemType="none" paginator="true" rows="7" styleClass="cars-datalist">
+                                <f:facet name="header">
+                                    Estudantes que se candidataram:
+                                </f:facet>                                
+                                <div style="font-size:20px;color:#757575;margin:0.5%;" class="clearfix car-item">
+                                    <div class="car-details" style="padding-right:10%;">
+                                        <p style="color:#3A52EF">Nome: #{estudante.nome}</p>
+                                        <p style="color:#757575">Curso: #{estudante.curso}</p> 
+                                        <p style="color:#757575">Periodo: #{estudante.periodo}</p>   
+                                    </div>
+                                    <div class="car-details">
+                                        <p:commandButton value="Contratar" actionListener="#{mBeanLogin.redirectContratar()}" style="margin:24px 24px 0 0"/>                                            
+                                        <p:commandButton value="Entrevista" update=":form:curriculo" oncomplete="PF('entrevista').show()" title="View Detail" style="margin:24px 24px 0 0">
+                                            <f:setPropertyActionListener value="#{estudante}" target="#{mBeanConcedente.estudante}" />
+                                        </p:commandButton>
+                                        <p:commandButton value="Ver currículo" update=":form:curriculo" oncomplete="PF('dialog').show()" title="View Detail" style="margin:24px 24px 0 0">
+                                            <f:setPropertyActionListener value="#{estudante}" target="#{mBeanConcedente.estudante}" />
+                                        </p:commandButton>
+                                    </div>
+                                </div>
+                            </p:dataList>
+                        </p:outputPanel>
+                    </p:dialog>
+
+                    <p:dialog header="Currículo" widgetVar="dialog" responsive="true" modal="true" showEffect="blind" hideEffect="explode" resizable="false">
+                        <p:outputPanel id="curriculo" style="text-align:center;">
+                            <p:panelGrid  columns="2" rendered="#{not empty mBeanConcedente.estudante.curriculo}" columnClasses="label,value">
+                                <f:facet name="Nome:">
+                                    <p>#{mBeanConcedente.estudante.nome}</p>
+                                </f:facet>
+                                <h:outputText value="Formação:" />
+                                <p style="color:#757575">#{mBeanConcedente.estudante.curriculo.formacao}</p>
+
+                                <h:outputText value="Cursos:" />
+                                <p style="color:#757575">#{mBeanConcedente.estudante.curriculo.cursos}</p>
+
+                                <h:outputText value="Habilidades:" />
+                                <p style="color:#757575">#{mBeanConcedente.estudante.curriculo.habilidades}</p>
+
+                                <h:outputText value="Sobre:" />
+                                <p style="color:#757575">#{mBeanConcedente.estudante.curriculo.sobre}</p>
+
+                            </p:panelGrid>
+                        </p:outputPanel>
+                    </p:dialog>
+
+                    <p:dialog header="Convocar para entrevista" widgetVar="entrevista" responsive="true" modal="true" showEffect="blind" hideEffect="explode" resizable="false">
+                        <p:outputPanel id="entrevista" style="text-align:center;">
+                            <f:facet name="header">
+                                <p>Digite uma mensagem para o estudante</p>
+                            </f:facet> 
+                            <div style="font-size:20px;color:#757575;margin:0.5%;" class="clearfix car-item">
+
+                                <div class="car-details">
+                                    <p:outputLabel value="Mensagem:" for="cursos" />                                
+                                </div>
+                                <div class="car-details">
+                                    <p:inputTextarea id="cursos" value="#{mBeanLogin.mensagem}" rows="3"/>
+                                    <p:commandButton value="Enviar" actionListener="#{mBeanLogin.entrevista}" style="margin:24px 24px 0 0"/>
+                                </div>
+                            </div>
+                        </p:outputPanel>
+                    </p:dialog>
+                </div>
+            </div>
+        </h:form>
+    </ui:define>
+</ui:composition>

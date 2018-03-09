@@ -1,0 +1,92 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/templateEstudante.xhtml">
+    <ui:define name="head">
+        <style type="text/css">
+            .cars-datalist .text-column p:last-child{
+                color:#757575;
+            }
+
+            .cars-datalist .car-item i, .cars-datalist .car-item .car-details {
+                display: inline-block;
+                vertical-align: middle;
+            }
+
+            .cars-datalist .car-item button {
+                float: right;
+            }
+
+            .cars-datalist ul {
+                margin: 0;
+                padding: 0;
+            }
+
+            .ui-car-display td:last-child {
+                font-weight: 700;
+            }
+
+            @media (max-width:640px) {
+                .cars-datalist .text-column {
+                    text-align: center;
+                }
+            }
+        </style>        
+    </ui:define>
+    <ui:define name="content">
+
+        <h:form id="form">
+            <div class="ui-g-12">
+                <div class="card card-w-title">
+                   
+
+                    <p:growl id="message" showDetail="true" />
+
+                    <p:dataList value="#{mBeanAluno.vagas}" var="vaga" 
+                                type="unordered" itemType="none" paginator="true" rows="7" styleClass="cars-datalist">
+                        <f:facet name="header">
+                            Vagas abertas
+                        </f:facet>
+                        <div style="border-bottom: 1px solid #bdbdbd" class="clearfix car-item">
+                            <i class="ui-icon ui-icon-account-circle" style="font-size:48px;color:#757575;margin:24px;"></i>
+                            <div class="car-details">
+                                <p >#{vaga.nomeDaVaga}</p>
+                                <p style="color:#757575">#{vaga.planoDeAtividades} -</p> 
+                                <p style="color:#23c436">R$#{vaga.valorDaBolsa}</p>   
+                            </div>
+                            <p:commandButton update=":form:carDetail" oncomplete="PF('carDialog2').show()" title="View Detail" icon="ui-icon-search" style="margin:35px 24px 0 0">
+                                <f:setPropertyActionListener value="#{vaga}" target="#{mBeanAluno.vaga}" />
+                            </p:commandButton>
+                        </div>
+                    </p:dataList>
+
+                    <p:dialog header="Detalhes da vaga" widgetVar="carDialog2" responsive="true" modal="true" showEffect="blind" hideEffect="explode" resizable="false">
+                        <p:outputPanel id="carDetail" style="text-align:center;">
+                            <p:panelGrid  columns="2" rendered="#{not empty mBeanAluno.vaga}" columnClasses="label,value">
+                                <f:facet name="header">
+                                    <p>#{mBeanAluno.vaga.nomeDaVaga}</p>
+                                </f:facet>
+
+                                <h:outputText value="Empresa:" />
+                                <p>#{mBeanAluno.vaga.concedente.nome}</p> 
+
+                                <h:outputText value="Jornada Diária:" />
+                                <p>#{mBeanAluno.vaga.jornadaDiaria} Horas</p> 
+
+                                <h:outputText value="Benefícios:" />
+                                <p>#{mBeanAluno.vaga.beneficios}</p>
+
+                                <h:outputText value="Valor da bolsa:" />
+                                <p style="color:#23c436">R$#{mBeanAluno.vaga.valorDaBolsa}</p>
+
+                            </p:panelGrid>
+                            <p:commandButton rendered= "#{mBeanAluno.aluno.curriculo.cursos ne ''  }" value="Enviar currículo" styleClass="green-btn" actionListener="#{mBeanAluno.enviarCurriculoParaEmpresa}" />
+                        </p:outputPanel>
+                    </p:dialog>
+                </div>
+            </div>
+        </h:form>
+    </ui:define>
+</ui:composition>

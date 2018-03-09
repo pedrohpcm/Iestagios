@@ -1,0 +1,350 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:head>
+        <title>TODO supply a title</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </h:head>
+
+    <h:body>
+        <h:form>
+            <div class="ui-g ui-fluid" align="center">
+                <div class="ui-g-12 ui-lg-3"></div>
+                <div class="ui-g-12 ui-lg-7">
+                    <div class="card">
+                        <p:growl id="msgs" showDetail="true" />
+                        <p:panel id="basic" header="Contratar estudante">                            
+                            <p:wizard flowListener="#{mBeanAluno.onFlowProcess}">
+                                <p:tab id="dadosConcedente" title="Dados da concedente">
+                                    <h2>Dados da concedente</h2>
+                                    <div class="ui-g-12 ui-md-12" style="text-align:left">
+                                        <p:outputLabel value="Nome do supervisor" for="nomeSupervisor" />
+                                        <p:inputText id="nomeSupervisor" value="#{mBeanContratar.estagio.supervisor}" required="true"/>
+                                    </div>
+
+                                    <div class="ui-g-12 ui-md-12" style="text-align:left">
+                                        <p:outputLabel value="Email do supervisor" for="emailSupervisor" />
+                                        <p:inputText id="emailSupervisor" value="#{mBeanContratar.estagio.emailSupervisor}" required="true"/>
+                                    </div>
+                                    <div class="ui-g-12 ui-md-12" style="text-align:left">
+                                        <p:outputLabel value="CNPJ da concedente:" for="cnpjCon" />
+                                        <p:autoComplete id="cnpjCon" value="#{mBeanContratar.cnpjConcedente}" completeMethod="#{mBeanContratar.completeTextConcedente}">
+                                            <p:ajax event="itemSelect" listener="#{mBeanContratar.onConcedenteSelect}" update="msgs" />
+                                            <p:ajax update="detalhesDaConcedente" />
+                                        </p:autoComplete>
+                                    </div>
+
+                                    <h:panelGroup id="detalhesDaConcedente" >
+                                        <p:outputPanel id="dConcedente" rendered="#{mBeanContratar.rendererConcedente}" autoUpdate="true">                     
+                                            <div class="ui-g-12 ui-md-12" style="text-align:left">
+                                                <p:outputLabel value="Ramo de atividade:" for="ramoCon" />
+                                                <p:inputText id="ramoCon" value="#{mBeanContratar.concedente.ramoDeAtividade}" required="true"/>
+                                            </div>
+
+                                            <div class="ui-g-12 ui-md-12" style="text-align:left">
+                                                <p:outputLabel value="Tipo de concedente:" for="tipoCon" />
+                                                <p:inputText id="tipoCon" value="#{mBeanContratar.concedente.tipoConcedente}" required="true"/>
+                                            </div>             
+
+                                            <div class="ui-g-12 ui-md-12" style="text-align:left">
+                                                <p:outputLabel value="Razão social:" for="razaoSocialCon" />
+                                                <p:inputText id="razaoSocialCon" value="#{mBeanContratar.concedente.razaoSocial}" required="true"/>
+                                            </div>
+
+                                            <div class="ui-g-12 ui-md-12" style="text-align:left">
+                                                <p:outputLabel value="Nome fantasia:" for="nomeFantasiaCon" />
+                                                <p:inputText id="nomeFantasiaCon" value="#{mBeanContratar.concedente.nome}" required="true"/>
+                                            </div>
+
+                                            <div class="ui-g-12 ui-md-12" style="text-align:left">
+                                                <p:outputLabel value="Rua:" for="ruaCon" />
+                                                <p:inputText id="ruaCon" value="#{mBeanContratar.concedente.endereco.rua}" required="true"/>
+
+                                                <p:outputLabel value="Numero:" for="numeroCon" />
+                                                <p:inputText id="numeroCon" value="#{mBeanContratar.concedente.endereco.numero}" required="true"/>
+                                            </div>
+
+                                            <div class="ui-g-12 ui-md-12" style="text-align:left">
+                                                <p:outputLabel value="Bairro:" for="bairroCon" />
+                                                <p:inputText id="bairroCon" value="#{mBeanContratar.concedente.endereco.bairro}" required="true"/>
+                                            </div>
+
+                                            <div class="ui-g-12 ui-md-12" style="text-align:left">
+                                                <p:outputLabel value="Cidade:" for="cidadeCon" />
+                                                <p:inputText id="cidadeCon" value="#{mBeanContratar.concedente.endereco.cidade}" required="true"/>
+                                            </div>
+
+                                            <div class="ui-g-12 ui-md-12" style="text-align:left">
+                                                <p:outputLabel value="Estado:" for="estadoCon" />
+                                                <p:inputText id="estadoCon" value="#{mBeanContratar.concedente.endereco.estado}" required="true"/>
+                                            </div>
+
+                                            <div class="ui-g-12 ui-md-12" style="text-align:left">
+                                                <p:outputLabel value="Cep:" for="cepCon" />
+                                                <p:inputText id="cepCon" value="#{mBeanContratar.concedente.endereco.cep}" required="true"/>
+                                            </div>
+
+                                            <div class="ui-g-12 ui-md-12" style="text-align:left">
+                                                <p:outputLabel value="Telefone:" for="telefoneCon" />
+                                                <p:inputText id="telefoneCon" value="#{mBeanContratar.concedente.telefone.numero}" required="true"/>
+                                            </div>
+
+                                            <div class="ui-g-12 ui-md-12" style="text-align:left">
+                                                <p:outputLabel value="Representante:" for="representanteCon" />
+                                                <p:inputText id="representanteCon" value="#{mBeanContratar.concedente.representante}" required="true"/>
+                                            </div>
+                                            <div class="ui-g-12 ui-md-12" style="text-align:left">
+                                                <p:outputLabel value="Email:" for="emailCon" />
+                                                <p:inputText id="emailCon" value="#{mBeanContratar.concedente.email}" required="true"/>
+                                            </div>
+                                            <div class="ui-g-12 ui-md-12" style="text-align:left">                                            <p:outputLabel value="Cargo:" for="cargoCon" />
+                                                <p:inputText id="cargoCon" value="#{mBeanContratar.concedente.cargo}" required="true"/>
+                                            </div> 
+
+                                        </p:outputPanel>
+                                    </h:panelGroup>
+                                </p:tab>
+                                <!--**********FIM DADOS DA CONCEDENTE**********-->
+
+
+                                <!--**********DADOS DO ESTUDANTE**********-->
+                                <p:tab id="dadosEstudante" title="Dados do estudante">
+                                    <h2>Dados do estudante</h2>
+                                    <div class="ui-g-12 ui-md-12" style="text-align:left">
+                                        <p:outputLabel value="CPF do estudante:" for="cpfAluno" />
+                                        <p:autoComplete id="cpfAluno" value="#{mBeanContratar.cpf}" completeMethod="#{mBeanContratar.completeTextAluno}">
+                                            <p:ajax event="itemSelect" listener="#{mBeanContratar.onEstudanteSelect}" update="msgs" />
+                                            <p:ajax update="detalhesDoEstudante" />
+                                        </p:autoComplete>
+                                    </div>
+                                    <!-- PAINEL QUE DEVERÁ APARECER CASO O ESTUDANTE NÃO ESTEJA CADASTRADO-->
+                                    <h:panelGroup id="detalhesDoEstudante">
+                                        <p:outputPanel id="dEstudante" rendered="#{mBeanContratar.rendererEstudante}" autoUpdate="true">                    
+                                            <div class="ui-g-12 ui-md-12" style="text-align:left">
+                                                <p:outputLabel value="Nome do estudante:" for="nomeEstudante" />
+                                                <p:inputText id="nomeEstudante" value="#{mBeanContratar.aluno.nome}" required="true"/>
+                                            </div>
+                                            
+                                            <div class="ui-g-12 ui-md-12" style="text-align:left">
+                                                <p:outputLabel value="Email:" for="email" />
+                                                <p:inputText id="email" value="#{mBeanContratar.aluno.email}" required="true"/>
+                                            </div>
+
+                                            <div class="ui-g-12 ui-md-12" style="text-align:left">
+                                                <p:outputLabel value="Rg:" for="rg" />
+                                                <p:inputText id="rg" value="#{mBeanContratar.aluno.rg}" required="true"/>
+                                            </div>
+
+                                            <div class="ui-g-12 ui-md-12" style="text-align:left">
+                                                <p:outputLabel value="Órgão expeditor:" for="orgaoExpeditor" />
+                                                <p:inputText id="orgaoExpeditor" value="#{mBeanContratar.aluno.orgaoExpeditor}" required="true"/>
+                                            </div>
+
+                                            <div class="ui-g-12 ui-md-12" style="text-align:left">
+                                                <p:outputLabel value="Endereço:" for="endereco" />
+                                                <p:inputText id="endereco" value="#{mBeanContratar.aluno.endereco.rua}" required="true"/>
+                                            </div>
+
+                                            <div class="ui-g-12 ui-md-12" style="text-align:left">
+                                                <p:outputLabel value="Cep:" for="cep" />
+                                                <p:inputText id="cep" value="#{mBeanContratar.aluno.endereco.cep}" required="true"/>
+                                            </div>
+
+                                            <div class="ui-g-12 ui-md-12" style="text-align:left">
+                                                <p:outputLabel value="Data de nascimento:" for="dataDeNascimento" />
+                                                <p:inputMask id="dataDeNascimento" value="#{mBeanContratar.aluno.dataDeNascimento}" mask="99/99/9999"  required="true"/>
+                                            </div>
+
+                                            <div class="ui-g-12 ui-md-12" style="text-align:left">
+                                                <p:outputLabel value="Curso:" for="curso" />
+                                                <p:inputText id="curso" value="#{mBeanContratar.aluno.curso}" required="true"/>
+                                            </div>
+
+                                            <div class="ui-g-12 ui-md-12" style="text-align:left">
+                                                <p:outputLabel value="Periodo/Ano:" for="ano" />
+                                                <p:inputText id="ano" value="#{mBeanContratar.aluno.ano}" required="true"/>
+                                            </div>
+                                        </p:outputPanel>  
+                                    </h:panelGroup>
+                                </p:tab>
+                                <!--**********FIM DADOS DO ESTUDANTE**********-->
+
+
+                                <!--**********DADOS DA INSTITUIÇÃO**********-->
+                                <p:tab id="dadosInstituicao" title="Dados da instituicao">
+                                    <h2>Dados da instituição</h2>       
+                                    <div class="ui-g-12 ui-md-12" style="text-align:left">
+                                        <p:outputLabel value="Nome do orientador" for="nomeOrientador" />
+                                        <p:inputText id="nomeOrientador" value="#{mBeanContratar.estagio.orientador}" required="true"/>
+                                    </div>
+
+                                    <div class="ui-g-12 ui-md-12" style="text-align:left">
+                                        <p:outputLabel value="Email do orientador" for="emailOrientador" />
+                                        <p:inputText id="emailOrientador" value="#{mBeanContratar.estagio.emailOrientador}" required="true"/>
+                                    </div>
+                                    <div class="ui-g-12 ui-md-12" style="text-align:left">
+                                        <p:outputLabel value="CNPJ da Instituição" for="cnpjIE" />
+                                        <p:autoComplete id="cnpjIE" value="#{mBeanContratar.cnpjInstituicao}" completeMethod="#{mBeanContratar.completeTextInstituicao}">
+                                            <p:ajax event="itemSelect" listener="#{mBeanContratar.onInstituicaoSelect}" update="msgs" />
+                                            <p:ajax update="detalhesDaInstituicao" />
+                                        </p:autoComplete>
+                                    </div>
+
+                                    <h:panelGroup id="detalhesDaInstituicao">
+                                        <p:outputPanel id="dInstituicao" rendered="#{mBeanContratar.rendererInstituicao}" autoUpdate="true"> 
+                                            <div class="ui-g-12 ui-md-12" style="text-align:left">
+                                                <p:outputLabel value="Ramo de atividade:" for="ramoIE" />
+                                                <p:inputText id="ramoIE" value="#{mBeanContratar.instituicao.ramoDeAtividade}" required="true"/>
+                                            </div>
+
+                                            <div class="ui-g-12 ui-md-12" style="text-align:left">
+                                                <p:outputLabel value="Tipo de concedente:" for="tipoIE" />
+                                                <p:inputText id="tipoIE" value="#{mBeanContratar.instituicao.tipoConcedente}" required="true"/>
+                                            </div>             
+
+                                            <div class="ui-g-12 ui-md-12" style="text-align:left">
+                                                <p:outputLabel value="Razão social:" for="razaoSocialIE" />
+                                                <p:inputText id="razaoSocialIE" value="#{mBeanContratar.instituicao.razaoSocial}" required="true"/>
+                                            </div>
+
+                                            <div class="ui-g-12 ui-md-12" style="text-align:left">
+                                                <p:outputLabel value="Nome fantasia:" for="nomeFantasiaIE" />
+                                                <p:inputText id="nomeFantasiaIE" value="#{mBeanContratar.instituicao.nome}" required="true"/>
+                                            </div>
+
+                                            <div class="ui-g-12 ui-md-12" style="text-align:left">
+                                                <p:outputLabel value="Rua:" for="ruaIE" />
+                                                <p:inputText id="ruaIE" value="#{mBeanContratar.instituicao.endereco.rua}" required="true"/>
+                                            </div>
+                                            <div class="ui-g-12 ui-md-12" style="text-align:left">
+                                                <p:outputLabel value="Numero:" for="numeroIE" />
+                                                <p:inputText id="numeroIE" value="#{mBeanContratar.instituicao.endereco.numero}" required="true"/>
+                                            </div>
+
+                                            <div class="ui-g-12 ui-md-12" style="text-align:left">
+                                                <p:outputLabel value="Bairro:" for="bairroIE" />
+                                                <p:inputText id="bairroIE" value="#{mBeanContratar.instituicao.endereco.bairro}" required="true"/>
+                                            </div>
+
+                                            <div class="ui-g-12 ui-md-12" style="text-align:left">
+                                                <p:outputLabel value="Cidade:" for="cidadeIE" />
+                                                <p:inputText id="cidadeIE" value="#{mBeanContratar.instituicao.endereco.cidade}" required="true"/>
+                                            </div>
+
+                                            <div class="ui-g-12 ui-md-12" style="text-align:left">
+                                                <p:outputLabel value="Estado:" for="estadoIE" />
+                                                <p:inputText id="estadoIE" value="#{mBeanContratar.instituicao.endereco.estado}" required="true"/>
+                                            </div>
+
+                                            <div class="ui-g-12 ui-md-12" style="text-align:left">
+                                                <p:outputLabel value="Cep:" for="cepIE" />
+                                                <p:inputText id="cepIE" value="#{mBeanContratar.instituicao.endereco.cep}" required="true"/>
+                                            </div>
+
+                                            <div class="ui-g-12 ui-md-12" style="text-align:left">
+                                                <p:outputLabel value="Telefone:" for="telefoneIE" />
+                                                <p:inputText id="telefoneIE" value="#{mBeanContratar.instituicao.telefone.numero}" required="true"/>
+                                            </div>
+
+                                            <div class="ui-g-12 ui-md-12" style="text-align:left">
+                                                <p:outputLabel value="Representante:" for="representanteIE" />
+                                                <p:inputText id="representanteIE" value="#{mBeanContratar.instituicao.representante}" required="true"/>
+                                            </div>
+                                            <div class="ui-g-12 ui-md-12" style="text-align:left">
+                                                <p:outputLabel value="Email:" for="emailIE" />
+                                                <p:inputText id="emailIE" value="#{mBeanContratar.instituicao.email}" required="true"/>
+                                            </div>
+                                            <div class="ui-g-12 ui-md-12" style="text-align:left">
+                                                <p:outputLabel value="Cargo:" for="cargoIE" />
+                                                <p:inputText id="cargoIE" value="#{mBeanContratar.instituicao.cargo}" required="true"/>
+                                            </div> 
+                                        </p:outputPanel>
+                                    </h:panelGroup>
+                                </p:tab>
+                                <!--**********FIM DADOS DA INSTITUIÇÃO**********-->
+
+
+                                <!--**********DADOS DA VAGA**********-->
+                                <p:tab id="dadosDaVaga" title="Dados da vaga">
+                                    <h2>Dados da vaga</h2>
+                                    <div class="ui-g-12 ui-md-12" style="text-align:left">                       
+                                        <p:outputLabel value="Nome da vaga:" for="event" />
+                                        <p:autoComplete id="event" value="#{mBeanContratar.idVaga}" completeMethod="#{mBeanContratar.completeTextVagas}">
+                                            <p:ajax event="itemSelect" listener="#{mBeanContratar.onVagaSelect}" update="msgs   " />
+                                            <p:ajax update="detalhesDaVaga" />
+
+                                        </p:autoComplete>
+                                    </div>
+                                    <div class="ui-g-12 ui-md-12" style="text-align:left">
+                                        <p:outputLabel value="Data de início" for="dataInicio" />
+                                        <p:inputText id="dataInicio" value="#{mBeanContratar.estagio.dataInicio}" required="true"/>
+                                    </div>
+
+                                    <div class="ui-g-12 ui-md-12" style="text-align:left">
+                                        <p:outputLabel value="Data de término" for="dataTermino" />
+                                        <p:inputText id="dataTermino" value="#{mBeanContratar.estagio.dataFim}" required="true"/>
+                                    </div>
+
+                                    <h:panelGroup id="detalhesDaVaga">
+                                        <p:outputPanel id="toUpdate" rendered="#{mBeanContratar.rendererVaga}" autoUpdate="true">
+                                            <div class="ui-g-12 ui-md-12" style="text-align:left">
+                                                <p:outputLabel value="Valor da bolsa:" for="valorBolsa" />
+                                                <p:inputText id="valorBolsa" value="#{mBeanContratar.vaga.valorDaBolsa}" required="true"/>
+                                            </div>
+                                            <div class="ui-g-12 ui-md-12" style="text-align:left">
+                                                <p:outputLabel value="Benefícios:" for="beneficios" />
+                                                <p:inputText id="beneficios" value="#{mBeanContratar.vaga.beneficios}" required="true"/>
+                                            </div>
+                                            <div class="ui-g-12 ui-md-12" style="text-align:left">
+                                                <p:outputLabel value="Auxílio transporte:" for="auxilioTransporte" />
+                                                <p:inputText id="auxilioTransporte" value="#{mBeanContratar.vaga.auxilioTransporte}" required="true"/>
+                                            </div>                    
+                                            <div class="ui-g-12 ui-md-12" style="text-align:left">
+                                                <p:outputLabel value="Plano de atividades:" for="planoDeAtividades" />
+                                                <p:inputText id="planoDeAtividades" value="#{mBeanContratar.vaga.planoDeAtividades}" required="true"/>
+                                            </div>
+                                            <div class="ui-g-12 ui-md-12" style="text-align:left">
+                                                <p:outputLabel value="Jornada diária:" for="jornadaDiaria" />
+                                                <p:inputText id="jornadaDiaria" value="#{mBeanContratar.vaga.jornadaDiaria}" required="true"/>
+                                            </div>
+                                            <div class="ui-g-12 ui-md-12" style="text-align:left">
+                                                <p:outputLabel value="Total de horas semanais:" for="horasSemanais" />
+                                                <p:inputText id="horasSemanais" value="#{mBeanContratar.vaga.totalHorasSemanais}" required="true"/>
+                                            </div>
+                                        </p:outputPanel>  
+                                    </h:panelGroup>       
+
+                                    <!--**********FIM DADOS DA VAGA**********-->
+                                    <div>
+                                        <p:commandButton value="Contratar"  styleClass="green-btn" ajax="false" onclick="PrimeFaces.monitorDownload(start, stop);" icon="ui-icon-arrowthick-1-s">
+                                            <p:fileDownload value="#{mBeanContratar.file}" />
+                                        </p:commandButton>
+                                    </div>
+                                </p:tab>
+                            </p:wizard>
+                        </p:panel>
+                    </div>
+                </div>
+            </div>
+
+            <script type="text/javascript">
+                function start() {
+                    PF('statusDialog').show();
+                }
+
+                function stop() {
+                    PF('statusDialog').hide();
+                }
+            </script> 
+        </h:form>
+    </h:body>
+</html>

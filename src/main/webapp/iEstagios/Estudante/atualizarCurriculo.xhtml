@@ -1,0 +1,68 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/templateEstudante.xhtml">
+    <ui:define name="head">
+        <style type="text/css">
+            .cars-datalist .text-column p:last-child{
+                color:#757575;
+            }
+
+            .cars-datalist .car-item i, .cars-datalist .car-item .car-details {
+                display: inline-block;
+                vertical-align: middle;
+            }
+
+            .cars-datalist .car-item button {
+                float: right;
+            }
+
+            .cars-datalist ul {
+                margin: 0;
+                padding: 0;
+            }
+
+            .ui-car-display td:last-child {
+                font-weight: 700;
+            }
+
+            @media (max-width:640px) {
+                .cars-datalist .text-column {
+                    text-align: center;
+                }
+            }
+        </style>        
+    </ui:define>
+    <ui:define name="content">
+        <div class="ui-g ui-fluid" align="center">
+            <div class="ui-g-12 ui-lg-12"></div>
+                <div class="card">
+
+                    <p:panel id="basic" header="Cadastrar currículo">
+                        <h:form>
+                            <div class="ui-g-12 ui-md-12" style="text-align:left">
+                                <p:outputLabel value="Formação:" for="formacao" />
+                                <p:inputTextarea id="formacao" value="#{mBeanAluno.aluno.curriculo.formacao}" rows="3"/>
+                            </div>
+                            <div class="ui-g-12 ui-md-12" style="text-align:left">
+                                <p:outputLabel value="Cursos:" for="cursos" />
+                                <p:inputTextarea id="cursos" value="#{mBeanAluno.aluno.curriculo.cursos}" rows="3"/>
+                            </div>
+                            <div class="ui-g-12 ui-md-12" style="text-align:left">
+                                <p:outputLabel value="Habilidades:" for="hab" />
+                                <p:inputTextarea id="hab" value="#{mBeanAluno.aluno.curriculo.habilidades}" rows="3"/>
+                            </div>
+                            <div class="ui-g-12 ui-md-12" style="text-align:left">
+                                <p:outputLabel value="Sobre você:" for="sobre" />
+                                <p:inputTextarea id="sobre" value="#{mBeanAluno.aluno.curriculo.sobre}" rows="3"/>
+                            </div>
+
+                            <p:commandButton value="Cadastrar" styleClass="green-btn" actionListener="#{mBeanAluno.atualizarCurriculo}"/>
+                        </h:form>
+                    </p:panel>
+                </div>
+        </div>
+    </ui:define>
+</ui:composition>

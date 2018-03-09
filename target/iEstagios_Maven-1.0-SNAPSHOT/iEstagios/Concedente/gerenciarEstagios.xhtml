@@ -1,0 +1,69 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/templateConcedente.xhtml">
+
+
+    <ui:define name="head">
+        <style type="text/css">
+            .cars-datalist .text-column p:last-child{
+                color:#757575;
+            }
+
+            .cars-datalist .car-item i, .cars-datalist .car-item .car-details {
+                display: inline-block;
+                vertical-align: middle;
+            }
+
+            .cars-datalist .car-item button {
+                float: right;
+            }
+
+            .cars-datalist ul {
+                margin: 0;
+                padding: 0;
+            }
+
+            .ui-car-display td:last-child {
+                font-weight: 700;
+            }
+
+            @media (max-width:640px) {
+                .cars-datalist .text-column {
+                    text-align: center;
+                }
+            }
+        </style>        
+    </ui:define>
+    <ui:define name="title">File</ui:define>
+    <ui:define name="content">
+        <h:form id="form">
+            <div class="ui-g-12">
+                <div class="card card-w-title">
+
+                    <p:growl id="message" showDetail="true" />
+                    <p:dataList value="#{mBeanConcedente.estagios}" var="estagio" 
+                                type="unordered" itemType="none" paginator="true" rows="7" styleClass="cars-datalist">
+                        <f:facet name="header">
+                            Estágios da sua empresa:
+                        </f:facet>
+                        <div style="border-bottom: 1px solid #bdbdbd" class="clearfix car-item" >
+                            <i class="ui-icon ui-icon-account-circle" style="font-size:48px;color:#757575;margin:24px;"></i>
+                            <div class="car-details">
+                                <p style="color:#23c436">#{estagio.id}</p>   
+                                <p >#{estagio.vaga.nomeDaVaga}</p>
+                                <p style="color:#757575">#{estagio.aluno.nome} -</p> 
+                            </div>
+                            <p:commandButton oncomplete="PF('carDialog2').show()" title="View Detail" icon="ui-icon-search" style="margin:35px 24px 0 0" actionListener="#{mBeanConcedente.redirectDocumentos()}">
+                                <f:setPropertyActionListener value="#{estagio}" target="#{mBeanConcedente.estagioSelecionado}" />
+                            </p:commandButton>
+                        </div>
+                    </p:dataList>
+
+                </div>
+            </div>
+        </h:form>
+    </ui:define>
+</ui:composition>

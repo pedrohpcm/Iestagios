@@ -1,0 +1,44 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/templateConcedente.xhtml">
+
+
+    <ui:define name="head">
+    </ui:define>
+    <ui:define name="title">File</ui:define>
+    <ui:define name="content">    
+        <h:form id="form">
+            <center>
+                <p:selectOneMenu   id="descricao"  value="#{mBeanAluno.descricaoDocumento}"
+                                   requiredMessage="Campo descricao é obrigatório" >
+                    <f:selectItem itemLabel="Relatório de estágio" itemValue="Relatório de estágio" />
+                    <f:selectItem itemLabel="Termo de encerramento" itemValue="Termo de encerramento" />
+                    <p:ajax event="change" update="form"/>
+                </p:selectOneMenu>  
+                <div style="font-size:20px;color:#757575;margin:0.5%;" class="clearfix car-item">
+                    Enviar documento do estágio                    
+                    <p:fileUpload update="@form" value="#{mBeanAluno.fileName}" fileUploadListener="#{mBeanAluno.processFileUpload}" allowTypes="/(\.|\/)(gif|jpe?g|png|pdf)$/" required="true" requiredMessage="É necessário enviar o documento!" sizeLimit="1048576" />
+                </div>
+            </center>
+
+            <p:dataList value="#{mBeanAluno.documentosDoEstagioSelecionado}" var="documento" type="unordered" itemType="none" paginator="true" rows="7" styleClass="cars-datalist">
+                <f:facet name="header">
+                    Documentos:
+                </f:facet>    
+                <center>
+                    <div style="font-size:20px;color:#757575;margin:0.5%;" class="clearfix car-item">
+                        <div class="car-details" style="padding-right:10%;">
+                            <p style="color:#3A52EF">#{documento.id} - #{documento.descricao} -<h:outputLink   value="#{documento.url}" target="_blank">
+                                    <img width="25" height="25" src="../resources/img/acrobatpdf.jpg" alt=""/>
+                                </h:outputLink>
+                            </p>                                    
+                        </div>
+                    </div>
+                </center>
+            </p:dataList>
+        </h:form>
+    </ui:define>
+</ui:composition>
