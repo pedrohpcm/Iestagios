@@ -1,0 +1,39 @@
+<ion-content>
+  <ion-fab top right>
+  	<button ion-fab mini color="light" (click)="ToTabPage()"><ion-icon name="close" color="iestagios"></ion-icon></button>
+  </ion-fab>
+
+  <ion-slides direction="horizontal" effect="flip" pager paginationType="progress">
+  	<ion-slide class="slide">
+  		<h1>Bem vindo!</h1> 
+  		<p>Obrigado por nos escolher como intermediário dos seus estágios!</p>
+  		<ion-item no-lines color="iestagios">
+  			<button ion-button round small icon-only item-end color="light" (click)="ToNextSlide()"><ion-icon name="arrow-round-forward" color="iestagios"></ion-icon></button>
+  		</ion-item>
+  	</ion-slide>
+  	<ion-slide class="slide">
+  		<h1>Gerenciamento...</h1>
+  		<p>Nós iremos lhe auxiliar no envio do seu currículo e enviaremos notificações em caso de contratação!</p>
+  		<ion-item no-lines color="iestagios">
+  			<button ion-button round small icon-only item-start color="light" (click)="ToPrevSlide()"><ion-icon name="arrow-round-back" color="iestagios"></ion-icon></button>
+  			<button ion-button round small icon-only item-end color="light" (click)="ToNextSlide()"><ion-icon name="arrow-round-forward" color="iestagios"></ion-icon></button>
+  		</ion-item>
+  	</ion-slide>
+  	<ion-slide class="slide">
+  		<h1>Segurança e Privacidade</h1>
+  		<p>Trataremos seus dados pessoais cuidadosamente.</p>
+  		<ion-item no-lines color="iestagios">
+  			<button ion-button round small icon-only item-start color="light" (click)="ToPrevSlide()"><ion-icon name="arrow-round-back" color="iestagios"></ion-icon></button>
+  			<button ion-button round small icon-only item-end color="light" (click)="ToNextSlide()"><ion-icon name="arrow-round-forward" color="iestagios"></ion-icon></button>
+  		</ion-item>
+  	</ion-slide>
+  	<ion-slide class="slide">
+  		<h1>Vamos lá!</h1>
+  		<p>Procure por estágios na sua área de conhecimento.<p>
+  		<p>Boa sorte!</p>
+  		<ion-item no-lines color="iestagios">
+  			<button ion-button round small icon-only item-start color="light" (click)="ToPrevSlide()"><ion-icon name="arrow-round-back" color="iestagios"></ion-icon></button>
+  		</ion-item>
+  	</ion-slide>
+  </ion-slides>
+</ion-content>

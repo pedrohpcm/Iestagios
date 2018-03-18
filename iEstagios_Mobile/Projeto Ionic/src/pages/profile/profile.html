@@ -1,0 +1,31 @@
+<ion-content padding>
+  <ion-list>
+  	<ion-item>
+  		<ion-label floating>Nome:</ion-label>
+  		<!--<ion-input id="input1" value="{{firstname}}" type="text" clearInput></ion-input>-->
+      <ion-input [(ngModel)]="firstname" type="text" clearInput></ion-input>
+  	</ion-item>
+
+  	<ion-item>
+  		<ion-label floating>Sobrenome:</ion-label>
+  		<!--<ion-input id="input2" value="{{lastname}}" type="text" clearInput></ion-input>-->
+      <ion-input [(ngModel)]="lastname" type="text" clearInput></ion-input>
+  	</ion-item>
+
+  	<ion-item>
+  		<ion-label floating>Email:</ion-label>
+  		<!--<ion-input id="input3" value="{{email}}" type="email" clearInput></ion-input>-->
+      <ion-input [(ngModel)]="email" type="email" clearInput></ion-input>
+  	</ion-item>
+
+  	<ion-item>
+  		<ion-label floating>Idade:</ion-label>
+  		<!--<ion-input id="input4" value="{{age}}" type="number" step="10" clearInput></ion-input>-->
+      <ion-input [(ngModel)]="age" type="number" step="10" clearInput></ion-input>
+  	</ion-item>
+
+  	<ion-item>
+  		<button ion-button block color="secondary" (click)="ToUpdateProfile()">Atualizar</button>
+  	</ion-item>
+  </ion-list>
+</ion-content>

@@ -1,0 +1,16 @@
+<ion-header>
+  <ion-toolbar color="iestagios">
+  	<ion-item no-lines color="iestagios">
+  		<ion-title>iEstágios</ion-title>
+  		<button ion-button round color="light" icon-left item-end><ion-badge color="light" class="text" item-end>2</ion-badge><ion-icon name="notifications" color="iestagios" end></ion-icon></button>
+  	</ion-item>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-tabs tabsLayout="icon-bottom" tabsPlacement="top">
+  	<ion-tab tabTitle="Perfil" tabIcon="create" [root]="tab1"></ion-tab>
+  	<ion-tab tabTitle="Currículo" tabIcon="school" [root]="tab2"></ion-tab>
+  	<ion-tab tabTitle="Vagas" tabIcon="briefcase" [root]="tab3"></ion-tab>
+  </ion-tabs>
+</ion-content>
