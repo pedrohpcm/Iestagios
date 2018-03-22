@@ -23,7 +23,7 @@
             <div class="card login-panel ui-fluid">
                 <div class="ui-g">
                     <div class="ui-g-12">
-                        <p:graphicImage name="images/logo-ultima.svg" library="ultima-layout" />
+                       <a href="/iEstagios/index.xhtml"><p:graphicImage name="images/logo-ultima.svg" library="ultima-layout" /></a>
                     </div>
                     <div class="ui-g-12">
                         <h:panelGroup styleClass="md-inputfield">
@@ -38,14 +38,14 @@
                         </h:panelGroup>
                     </div>
                     <div class="ui-g-12">
-                        <p:commandButton value="Login" styleClass="green-btn" actionListener="#{mBeanLogin.logar}" update="growl"/>
-                        <p:button  value="Cadastre-se" styleClass="blue-btn" outcome="/iEstagios/preCadastro" />
+                        <p:commandButton styleClass="green-btn" value="Login"  actionListener="#{mBeanLogin.logar}" update="growl"/>
+                        <p:button  styleClass="blue-btn" value="Cadastre-se" outcome="/iEstagios/preCadastro" />
                         <p:link outcome="/iEstagios/recuperarSenha" value="Recuperar Senha" styleClass="secondary"/>
                     </div>
                 </div>
             </div>
 
-            <div class="login-footer">iEstágios</div>
+            <div class="login-footer"><a href="/iEstagios/index.xhtml">iEstágios</a></div>
 
             <h:outputStylesheet name="css/ripple.css" library="ultima-layout" />
             <h:outputStylesheet name="css/layout-#{guestPreferences.theme}.css" library="ultima-layout" />
