@@ -19,7 +19,7 @@ public class ContaDAO {
         conta.setSenha(gerarSenha());
         try {
             Connection conexao = Conexao.abrirConexao();
-            String cadastrarUsuario = "INSERT INTO conta(login,senha,tipo,estaCompleto) VALUES (?,?,?,?)";
+            String cadastrarUsuario = "INSERT INTO conta(email,senha,tipo,estaCompleto) VALUES (?,?,?,?)";
             PreparedStatement statement = conexao.prepareStatement(cadastrarUsuario);
             statement.setString(1, conta.getLogin());
             statement.setString(2, conta.getSenha());
