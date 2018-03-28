@@ -6,9 +6,6 @@ import iEstagios.modelo.Conta;
 import java.io.IOException;
 import java.io.Serializable;
 import java.sql.SQLException;
-import java.util.Random;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.annotation.PostConstruct;
@@ -69,23 +66,18 @@ public class mBeanConta implements Serializable {
 
                     if (atualizado == 1){
                         Email.enviarSenha(conta);
-
-                        try {
-                            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Email enviado com sucesso!", ""));
-                            context.getExternalContext().getFlash().setKeepMessages(true);
-                            context.getExternalContext().redirect("login.xhtml");
-                        } catch (IOException ex) {
-                            ex.printStackTrace();
-                        }
+                        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Email enviado com sucesso!", ""));
+                        context.getExternalContext().getFlash().setKeepMessages(true);
+                        context.getExternalContext().redirect("login.xhtml");
                     } 
                 } else {
                     context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Usuário não cadastrado", ""));
                 }
                 
-            } catch (SQLException ex) {
-                Logger.getLogger(mBeanConta.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException | IOException ex) {
+                ex.printStackTrace();
                 context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Algo aconteceu de inesperado, por gentilza entre em contato como administrador", ""));
-            }
+            } 
         } else {            
             context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Email inválido!", ""));
         }

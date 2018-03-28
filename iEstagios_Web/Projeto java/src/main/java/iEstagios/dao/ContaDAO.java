@@ -34,7 +34,7 @@ public class ContaDAO {
         int executeUpdate = 0;
         try {
             Connection conexao = Conexao.abrirConexao();
-            String atualizarUsuario = "UPDATE conta SET login = ?, senha = ? WHERE id = ?";
+            String atualizarUsuario = "UPDATE conta SET login = ?, senha = ? WHERE idusuario = ?";
             try (PreparedStatement ps = conexao.prepareStatement(atualizarUsuario)) {
                 ps.setString(1, conta.getLogin());
                 ps.setString(2, conta.getSenha());
