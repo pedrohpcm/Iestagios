@@ -14,9 +14,12 @@ import iEstagios.modelo.Conta;
 import iEstagios.modelo.Vaga;
 import java.io.IOException;
 import java.io.Serializable;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -50,34 +53,41 @@ public class mBeanLogin implements Serializable {
     }
 
     public void logar() {
-        Conta u = ContaDAO.pesquisarParaLogin(conta.getLogin(), conta.getSenha());
-        if (u != null) {
-            conta = u;
-            FacesContext context = FacesContext.getCurrentInstance();
-            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Bem vindo ao iEstagios!", ""));
-            if (conta.getTipo().equals("Estudante")) {
-                pagina = "/iEstagios/Estudante/indexEstudante.xhtml";
-                vagas = VagaDAO.buscarVagas();
-            } else {
-                if (conta.getTipo().equals("Concedente")) {
-                    pagina = "/iEstagios/Concedente/indexConcedente.xhtml";
+        Conta u;
+        FacesContext context = FacesContext.getCurrentInstance();
+        try {
+            u = ContaDAO.pesquisarParaLogin(conta.getLogin(), conta.getSenha());
+            if (u != null) {
+                conta = u;                
+                context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Bem vindo ao iEstagios!", ""));
+                
+                if (conta.getTipo().equals("Estudante")) {
+                    pagina = "/iEstagios/Estudante/indexEstudante.xhtml";
+                    vagas = VagaDAO.buscarVagas();
                 } else {
-                    pagina = "indexInstituicao.xhtml";
+                    if (conta.getTipo().equals("Concedente")) {
+                        pagina = "/iEstagios/Concedente/indexConcedente.xhtml";
+                    } else {
+                        pagina = "indexInstituicao.xhtml";
+                    }
                 }
+                
+                ExternalContext ec = context.getExternalContext();
+                Map attrMap = ec.getSessionMap();
+                attrMap.put("Conta", conta);
+    
+                context.getExternalContext().redirect(pagina);
+
+            } else {
+                context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Login ou senha inválidos!", ""));
             }
-            FacesContext facesContext = FacesContext.getCurrentInstance();
-            ExternalContext ec = facesContext.getExternalContext();
-            Map attrMap = ec.getSessionMap();
-            attrMap.put("Conta", conta);
+        } catch (SQLException | IOException ex) {
             try {
-                FacesContext.getCurrentInstance().getExternalContext().redirect(pagina);
-            } catch (IOException ex) {
-                ex.printStackTrace();
+                FacesContext.getCurrentInstance().getExternalContext().redirect("erro404.xhtml");
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-        } else {
-            FacesContext context = FacesContext.getCurrentInstance();
-            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Login ou senha inválidos!", ""));
-        }
+        }        
     }
 
     public void redirectInicio() {

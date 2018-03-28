@@ -48,9 +48,9 @@ public class ContaDAO {
         return executeUpdate;
     }
     
-    public static Conta pesquisarParaLogin(String login, String senha) {
+    public static Conta pesquisarParaLogin(String login, String senha) throws SQLException {
         Connection conexao = Conexao.abrirConexao();
-        String pesquisarAluno = "SELECT * FROM conta WHERE email = ? AND senha = ?";
+        String pesquisarAluno = "SELECT * FROM conta WHERE login = ? AND senha = ?";
         try {
             PreparedStatement statement = conexao.prepareStatement(pesquisarAluno);
             statement.setString(1, login);
@@ -66,8 +66,7 @@ public class ContaDAO {
                 return usuario;
             }
         } catch (SQLException e) {
-            FacesContext context = FacesContext.getCurrentInstance();
-            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Erro ao pesquisar no banco!", "classe: UsuarioDAO"));
+            throw  e;
         }
         return null;
     }
