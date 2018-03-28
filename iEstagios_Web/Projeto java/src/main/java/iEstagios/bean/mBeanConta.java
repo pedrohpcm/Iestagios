@@ -24,7 +24,8 @@ public class mBeanConta implements Serializable {
 
     private static final long serialVersionUID = 1L;
     private Conta conta;
-
+    private String erros;
+    
     @PostConstruct
     public void init() {
         conta = new Conta();
@@ -80,11 +81,20 @@ public class mBeanConta implements Serializable {
 
     public void recuperarSenha() {
         if (emailValido()) {
-            System.out.println("Email enviado com sucesso!");
+            
+            //lógica para enviar e-mail aqui
+            
+            try {
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Email enviado com sucesso!", ""));
+                FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
+                FacesContext.getCurrentInstance().getExternalContext().redirect("login.xhtml"); 
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
         } else {
-            System.out.println("Email inv�lido!");
+            FacesContext context = FacesContext.getCurrentInstance();
+            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Email inválido!", ""));
         }
-
     }
 
     public boolean emailValido() {
