@@ -1,0 +1,14 @@
+*/target/
+target/
+**/target/
+iEstagios_Web/pom.xml.tag
+iEstagios_Web/pom.xml.releaseBackup
+iEstagios_Web/pom.xml.versionsBackup
+iEstagios_Web/pom.xml.next
+iEstagios_Web/release.properties
+iEstagios_Web/dependency-reduced-pom.xml
+iEstagios_Web/buildNumber.properties
+iEstagios_Web/.mvn/timing.properties
+
+# Avoid ignoring Maven wrapper jar file (.jar files are usually ignored)
+iEstagios_Web/!/.mvn/wrapper/maven-wrapper.jar
