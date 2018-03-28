@@ -16,7 +16,6 @@ import javax.faces.context.FacesContext;
 public class ContaDAO {
 
     public static void cadastrar(Conta conta) {
-        conta.setSenha(gerarSenha());
         try {
             Connection conexao = Conexao.abrirConexao();
             String cadastrarUsuario = "INSERT INTO conta(login,senha,tipo,estaCompleto) VALUES (?,?,?,?)";
@@ -31,6 +30,24 @@ public class ContaDAO {
         }
     }
 
+    public static int atualizar(Conta conta) throws SQLException {
+        int executeUpdate = 0;
+        try {
+            Connection conexao = Conexao.abrirConexao();
+            String atualizarUsuario = "UPDATE conta SET login = ?, senha = ? WHERE id = ?";
+            try (PreparedStatement ps = conexao.prepareStatement(atualizarUsuario)) {
+                ps.setString(1, conta.getLogin());
+                ps.setString(2, conta.getSenha());
+                ps.setInt(3, conta.getId());
+                executeUpdate = ps.executeUpdate();
+            }
+        } catch (SQLException ex) {
+            throw ex;
+        }
+        
+        return executeUpdate;
+    }
+    
     public static Conta pesquisarParaLogin(String login, String senha) {
         Connection conexao = Conexao.abrirConexao();
         String pesquisarAluno = "SELECT * FROM conta WHERE email = ? AND senha = ?";
@@ -52,6 +69,29 @@ public class ContaDAO {
             FacesContext context = FacesContext.getCurrentInstance();
             context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Erro ao pesquisar no banco!", "classe: UsuarioDAO"));
         }
+        return null;
+    }
+    
+    public static Conta pesquisarPorLogin(String login) throws SQLException {
+        Connection conexao = Conexao.abrirConexao();
+        String pesquisarAluno = "SELECT * FROM conta WHERE login = ? ";
+        try {
+            PreparedStatement statement = conexao.prepareStatement(pesquisarAluno);
+            statement.setString(1, login);
+            ResultSet rs = statement.executeQuery();
+            if (rs.next()) {
+                Conta usuario = new Conta();
+                usuario.setId(rs.getInt(1));
+                usuario.setLogin(rs.getString(2));
+                usuario.setSenha(rs.getString(3));
+                usuario.setTipo(rs.getString(4));
+                usuario.setEstaCompleto(rs.getString(5));
+                return usuario;
+            }
+        } catch (SQLException e) {
+            throw e;
+        }
+        
         return null;
     }
     
@@ -78,14 +118,4 @@ public class ContaDAO {
         return null;
     }
 
-    public static String gerarSenha() {
-        String[] carct = {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"};
-        String senha = "";
-
-        for (int x = 0; x < 6; x++) {
-            int j = (int) (Math.random() * carct.length);
-            senha += carct[j];
-        }
-        return senha;
-    }
 }
