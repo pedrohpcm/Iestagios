@@ -3,6 +3,11 @@
 <glassfish-web-app error-url="">
   <context-root>/</context-root>
   <class-loader delegate="true"/>
+  <session-config>
+        <session-properties>
+            <property name="enableURLRewriting" value="false"/>
+        </session-properties>
+    </session-config>
   <jsp-config>
     <property name="keepgenerated" value="true">
       <description>Keep a copy of the generated servlet class' java code.</description>
